@@ -1,0 +1,137 @@
+#include <iostream>
+#include "SavingsAccount.h"
+#include <string>
+
+using namespace std;
+
+SavingsAccount::SavingsAccount(double input)
+{
+        balance = input;
+        
+
+};
+
+SavingsAccount::SavingsAccount(int acc, string nombre, double bal) //i needed new names so i picked some that made sense to me
+{
+        accountNumber = acc;
+        name = nombre;
+        balance = bal;
+        
+
+};
+
+SavingsAccount::~SavingsAccount()
+{
+	delete [] deposits;
+	deposits = 0;
+	delete [] withdrawals;
+	withdrawals = 0;
+}
+
+void SavingsAccount::setName(string nombre)
+{
+        name = nombre;
+}
+
+void SavingsAccount::setAccountNumber(int acc)
+{
+        accountNumber = acc;
+}
+
+string SavingsAccount::getName() const
+{
+        return name;
+}
+
+int SavingsAccount::getAccountNumber() const
+{
+        return accountNumber;
+}
+
+double SavingsAccount::getBalance() const
+{
+        return balance;
+}
+
+void SavingsAccount::deposit(double input)
+{
+        if(input > 0)
+        {
+                balance += input;
+        }
+                void getDeposits();
+
+                void getWithdrawals();
+
+	double* newDep = new double[numDeposits + 1];
+        for(int i = 0; i < numDeposits; i++)
+	{
+		newDep[i] = deposits[i];
+	}
+	newDep[numDeposits] = input;
+	balance += input;
+	deposits = newDep;
+                void getDeposits();
+
+                void getWithdrawals();
+
+	numDeposits++;
+	delete [] newDep;
+}
+
+void SavingsAccount::withdraw(double input)
+{
+        if(input > 0 && balance >= input)
+        {
+                balance -= input;
+        }
+	double* newWit = new double[numWithdrawals + 1];
+	for(int j = 0; j < numWithdrawals; j++)
+	{
+		newWit[j] = withdrawals[j];
+	}
+	newWit[numWithdrawals] = input;
+	balance -= input;
+	withdrawals = newWit;
+	numWithdrawals++;
+	delete [] newWit;
+}
+
+void SavingsAccount::printAccountInfo()
+{
+        cout << "\nAccount holder: " << getName();
+        cout << "\nAccount number: " << getAccountNumber();
+        cout << "\nBalance: " << getBalance();
+}
+
+void SavingsAccount::printDeposits()
+{
+	cout << "\nDeposits for account " << getAccountNumber() << endl;
+	double* temp = getDeposits();
+	for(int a = 0; a < numDeposits; a++)
+	{
+		cout << "$" << temp[a] << "\t";
+	}
+	cout << endl << endl;
+}
+
+void SavingsAccount::printWithdrawals()
+{
+	cout << "\nWithdrawals for account " << getAccountNumber() << endl;
+	double* temp = getWithdrawals();
+	for(int b = 0; b < numWithdrawals; b++)
+        {
+                cout << "$" << temp[b] << "\t";
+        }
+        cout << endl << endl;
+}
+
+double* getDeposits()
+{
+	return deposits;
+}
+
+double* getWithdrawals()
+{
+	return withdrawals;
+}
